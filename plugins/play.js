@@ -104,7 +104,7 @@ inrl({
 			});
 		}
 	} catch (e) {
-		m.send(e);
+		console.log(e);
 		return await m.send('_Error, try again!_')
 	}
 });
