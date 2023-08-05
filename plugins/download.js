@@ -19,13 +19,13 @@ const axios = require('axios');
 	} else {
 	await client.sendMessage(message.from, {video:{url:result.url},caption:result.title}).catch((e)=>message.reply('*_request Filed With StatusCode 403_*'));
 	}
-	}*/
+	}*
 	if(url.match(/https?:\/\/(?:www\.)?instagram\.com(?:\/[^\/]+)?\/(?:p|reel)\/([^\/?#&]+)/)){
 	let {data} =  await axios(BASE_URL + 'api/insta?url=' + url);
 	const {result} = data;
 	if(!result[0]) return await message.send('*Not Found*');
 	result.map(async(u)=> await message.sendFromUrl(u).catch((e)=>message.reply('*_request Filed With statusCode 503_*')))
-	}
+	}*/
 	if(url.match(/https:\/\/www\.mediafire\.com(?:\/[^\/]+)?\/(?:file)\/([^\/?#&]+)/)){
 	let {data} =  await axios(BASE_URL + 'api/mediafire?url=' + url);
 	const {result} = data;
