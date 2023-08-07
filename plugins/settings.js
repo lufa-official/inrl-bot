@@ -12,104 +12,159 @@ inrl({
 }, async (m) => {
     if (m.client.text && m.client.text.length > 3) return;
     return await m.sock.sendMessage(m.from, {
-        text: GenListMessage("Settings Updater", ["ANTI_SPAM", "ALLWAYS_ONLINE", "REACT", "AUTO_BIO", "READ_CHAT", "BGMBOT", "WORKTYPE", "PM_BLOCK", "CALL_BLOCK", "STATUS_VIEW", "AUTO_CHAT_PM", "AUTO_CHAT_GRP", "BOT_PRESENCE"])
+        text: GenListMessage("Settings Updater", ["SPAM MANAGER (GROUP/PM) 3S DELAY", "SHOW BOT ONLINE FOR ALL TIMES", "GIVE REACTION TO EVERY MESSAGE", "CHANGE BIO ACCORDING TO TIME (1) mnt", "VIEW ALL MESSAGES", "BGM BOT (Malayalam)", "MODE (public/private)", "BLOCK PEOPLE WHO MESSAGE YOU IN PM", "BLOCK CALLERS ON PM", "VIEW ALL STATUS", "WORK ON CHAT BOT PM", "WORK ON CHAT BOT GROUP", "PRESENCE WHEN RESPONDING","GIVE ADMIN SUDO ACCSES","REJECT CALLS","GIVE A WARNING TO THOSE WHO CONSTANTLY SEND MESSAGES IN THE GROUP","GIVE A WARNING TO THOSE WHO USE INAPPROPRIATE WORDS IN THE GROUP","BLOCK PEOPLE WHO USE INAPPROPRIATE WORDS IN PM","READ COMMANDS","BLOCK PEOPLE WHO CONSTANTLY MESSAGE YOU ON PM"], false,"\n_Send number as reply to update_")
     })
 });
 inrl({
-    pattern: 'configration',
-    type: "system",
     on: "text",
     fromMe: true
 }, async (m, text, data) => {
-    if(!m.reply_message.fromMe) return;
+    if(!m.reply_message.fromMe || !m.reply_message.text) return;
+    if(!m.reply_message.text.includes('_Send number as reply to update_')) return;
     match = m.client.body.toLowerCase();
     if (!match.includes('settings updater')) return;
     match = match.replace('settings updater', '').trim();
-    if (match == "allways_online") {
-        const {
-            ALLWAYS_ONLINE
-        } = data;
-        return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${ALLWAYS_ONLINE}`, [`ALLWAYS_ONLINE ${ALLWAYS_ONLINE== "true"? 'OFF':'ON'}`])
-        })
-    } else if (match == "anti_spam") {
+    if (match == "spam manager (group/pm) 3s delay") {
         const {
             ANTI_SPAM
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${ANTI_SPAM}`, [`ANTI_SPAM ${ANTI_SPAM== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${ANTI_SPAM}`, [`SPAM ${ANTI_SPAM== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "react") {
+    } else if (match == "show bot online for all times") {
+        const {
+            ALLWAYS_ONLINE
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${ALLWAYS_ONLINE}`, [`ALLWAYS ONLINE ${ALLWAYS_ONLINE== "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "give admin sudo accses") {
+        const {
+            ADMIN_SUDO_ACCESS
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${ADMIN_SUDO_ACCESS}`, [`ADMIN SUDO ACCESS ${ANTI_SPAM== "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "give reaction to every message") {
         const {
             REACT
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${REACT}`, [`REACT ${REACT== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${REACT}`, [`REACTION ${REACT== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "auto_bio") {
+    } else if (match == "change bio according to time (1) mnt") {
         const {
             AUTO_BIO
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${AUTO_BIO}`, [`AUTO_BIO ${AUTO_BIO== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${AUTO_BIO}`, [`CHANGE BIO ${AUTO_BIO== "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "view all messages") {
+        const {
+            READ_CHAT
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${READ_CHAT}`, [`READ CHAT ${READ_CHAT== "true"? 'deactivate ':'activate'}`])
         })
     } else if (match == "read_chat") {
         const {
             READ_CHAT
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${READ_CHAT}`, [`READ_CHAT ${READ_CHAT== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${READ_CHAT}`, [`READ_CHAT ${READ_CHAT== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "bgmbot") {
+    } else if (match == "bgm bot (malayalam)") {
         const {
             BGMBOT
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${BGMBOT}`, [`BGMBOT ${BGMBOT== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${BGMBOT}`, [`BGM BOT ${BGMBOT== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "worktype") {
+    } else if (match == "mode (public/private)") {
         const {
             WORKTYPE
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${WORKTYPE}`, [`WORKTYPE ${WORKTYPE== "public"? 'private':'public'}`])
+            text: GenListMessage(`status : ${WORKTYPE}`, [`MODE ${WORKTYPE== "public"? 'private':'public'}`])
         })
-    } else if (match == "pm_block") {
+    } else if (match == "block people who message you in pm") {
         const {
             PM_BLOCK
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${PM_BLOCK}`, [`PM_BLOCK ${PM_BLOCK== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${PM_BLOCK}`, [`BLOCK PM MSGS ${PM_BLOCK== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "call_block") {
+    } else if (match == "block callers on pm") {
         const {
             CALL_BLOCK
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${CALL_BLOCK}`, [`CALL_BLOCK ${CALL_BLOCK== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${CALL_BLOCK}`, [`BLOCK CALLERS ${CALL_BLOCK== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "status_view") {
+    } else if (match == "view all status") {
         const {
             STATUS_VIEW
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${STATUS_VIEW}`, [`STATUS_VIEW ${STATUS_VIEW== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${STATUS_VIEW}`, [`VIEW ALL STATUS ${STATUS_VIEW== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "auto_chat_pm") {
+    } else if (match == "work on chat bot pm") {
         const {
             AUTO_CHAT_PM
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${AUTO_CHAT_PM}`, [`AUTO_CHAT_PM ${AUTO_CHAT_PM== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${AUTO_CHAT_PM}`, [`CHAT BOT IN PM ${AUTO_CHAT_PM== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "auto_chat_grp") {
+    } else if (match == "work on chat bot group") {
         const {
             AUTO_CHAT_GRP
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${AUTO_CHAT_GRP}`, [`AUTO_CHAT_GRP ${AUTO_CHAT_GRP== "true"? 'OFF':'ON'}`])
+            text: GenListMessage(`status : ${AUTO_CHAT_GRP}`, [`CHAT BOT IN GROUP ${AUTO_CHAT_GRP== "true"? 'deactivate ':'activate'}`])
         })
-    } else if (match == "bot_presence") {
+    } else if (match == "reject calls") {
+        const {
+            REJECT_CALL
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${REJECT_CALL}`, [`REJECTCALL ${REJECT_CALL == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "give a warning to those who constantly send messages in the group") {
+        const {
+            WARN_GROUP_SPAMMERS
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${WARN_GROUP_SPAMMERS}`, [`WARN GROUP SPAMMERS ${WARN_GROUP_SPAMMERS == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "give a warning to those who use inappropriate words in the group") {
+        const {
+            BAD_WORD_WARN
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${BAD_WORD_WARN}`, [`WARN INAPPROPRIATE MESSAGE SENDER ${BAD_WORD_WARN == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "block people who use inappropriate words in pm") {
+        const {
+            BADWORD_BLOCK
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${BADWORD_BLOCK}`, [`BLOCK INAPPROPRIATE MESSAGE SENDER ${BADWORD_BLOCK == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "read commands") {
+        const {
+            READ_COMMANDS
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${READ_COMMANDS}`, [`READ COMMANDS ${READ_COMMANDS == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "block people who constantly message you on pm") {
+        const {
+            SPAM_BLOCK
+        } = data;
+        return await m.sock.sendMessage(m.from, {
+            text: GenListMessage(`status : ${SPAM_BLOCK}`, [`BLOCK SPAMMERS ${SPAM_BLOCK == "true"? 'deactivate ':'activate'}`])
+        })
+    } else if (match == "presence when responding") {
         const {
             BOT_PRESENCE
         } = data;
@@ -145,77 +200,110 @@ inrl({
     }
 });
 inrl({
-    pattern: 'listcontrol',
-    type: "system",
     on: "text",
     fromMe: true
 }, async (m, text, data) => {
     if(!m.reply_message.fromMe) return;
     if (!m.client.body.includes('status')) return;
     match = m.client.body.toLowerCase();
-    if (match.includes('allways_online')) {
+    if (match.includes('spam')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("ALLWAYS_ONLINE", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("SPAM", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('anti_spam')) {
+    } else if (match.includes('allways online')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("ANTI_SPAM", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("ALLWAYS_ONLINE", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('react')) {
+    } else if (match.includes('admin sudo access')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("REACT", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("ADMIN_SUDO_ACCESS", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('auto_bio')) {
+    } else if (match.includes('reaction')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("AUTO_BIO", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("REACT", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('change bio')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("AUTO_BIO", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_\n```try restart to activate```");
-    } else if (match.includes('read_chat')) {
+    } else if (match.includes('read chat')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("READ_CHAT", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("READ_CHAT", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('bgmbot')) {
+    } else if (match.includes('bgm bot')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("BGMBOT", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("BGMBOT", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('worktype')) {
+    } else if (match.includes('mode')) {
         let updt = match.split(" ").pop();
         updt = updt == "public" ? 'private' : 'public';
-        await UpdateVariable("WORKTYPE", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("WORKTYPE", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_\n```restart to run with new variable```");
-    } else if (match.includes('pm_block')) {
+    } else if (match.includes('block pm msgs')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("PM_BLOCK", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("PM_BLOCK", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('call_block')) {
+    } else if (match.includes('block callers')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("CALL_BLOCK", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("CALL_BLOCK", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('status_view')) {
+    } else if (match.includes('view all status')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("STATUS_VIEW", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("STATUS_VIEW", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('auto_chat_pm')) {
+    } else if (match.includes('chat bot in pm')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("AUTO_CHAT_PM", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("AUTO_CHAT_PM", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
-    } else if (match.includes('auto_chat_grp')) {
+    } else if (match.includes('chat bot in group')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("AUTO_CHAT_GRP", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("AUTO_CHAT_GRP", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('rejectcall')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("REJECT_CALL", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('warn group spammers')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("WARN_GROUP_SPAMMERS", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('warn inappropriate message sender')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("BADWORD_BLOCK", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('block inappropriate message sender')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("REJECT_CALL", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('read commands')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("READ_COMMANDS", updt, m.client.user.number);
+        return await m.reply("_*requested to the db*_");
+    } else if (match.includes('block spammers')) {
+        let updt = match.split(" ").pop();
+        updt = updt == "true" ? 'false' : 'true';
+        await UpdateVariable("SPAM_BLOCK", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
     } else if (match.includes('available') || match.includes('composing') || match.includes('recording') || match.includes('paused')) {
         let updt = match.split(" ")[0]
-        await UpdateVariable("BOT_PRESENCE", updt, m.client.user.id.split(':')[0]);
+        await UpdateVariable("BOT_PRESENCE", updt, m.client.user.number);
         return await m.reply("_*requested to the db*_");
     }
 });
