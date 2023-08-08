@@ -1,4 +1,4 @@
-//created by @inrl
+//created by @inrl 
 const {
     inrl,
     GenListMessage,
@@ -94,7 +94,7 @@ inrl({
         return await m.sock.sendMessage(m.from, {
             text: GenListMessage(`status : ${PM_BLOCK}`, [`AVOID PM MSGS ${PM_BLOCK== "true"? ': DEACTIVATE ':': ACTIVATE'}`])
         })
-    } else if (match == "block callers on pm") {
+    } else if (match == "avoid callers on pm") {
         const {
             CALL_BLOCK
         } = data;
