@@ -43,7 +43,7 @@ inrl({
             ADMIN_SUDO_ACCESS
         } = data;
         return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${ADMIN_SUDO_ACCESS}`, [`ADMIN SUDO ACCESS ${ANTI_SPAM== "true"? ': DEACTIVATE ':': ACTIVATE'}`])
+            text: GenListMessage(`status : ${ADMIN_SUDO_ACCESS}`, [`ADMIN SUDO ACCESS ${ADMIN_SUDO_ACCESS == "true"? ': DEACTIVATE ':': ACTIVATE'}`])
         })
     } else if (match == "give reaction to every message") {
         const {
